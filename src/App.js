@@ -14,6 +14,7 @@ function App() {
     fetch('https://randomuser.me/api?results=25')
       .then((res) => res.json())
       .then((res) => {
+        console.log(res.results)
         setUsers(res.results);
       });
   }, []);
