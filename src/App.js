@@ -2,28 +2,26 @@ import logo from './logo.svg';
 import './App.css';
 import React, {useState, useEffect} from 'react';
 import User from './User.js'
-import { isVisible } from '@testing-library/user-event/dist/utils';
 
 function App() {
 
-  [isVisible, setVisibility] = useState([])
+  const [isVisible, setVisibility] = useState([])
 
-  const users = []
+  const [users, setUsers] = useState([])
 
   // For functional components, instead of ComponentDidMount, use useEffect with empty array
-  useEffect( () => {
+  useEffect(() => {
     fetch('https://randomuser.me/api?results=25')
-    .then( res => res.json())
-    .then( res => {
-      users = res.results
-      console.log(users)
-    })
-    }, [])
+      .then((res) => res.json())
+      .then((res) => {
+        setUsers(res.results);
+      });
+  }, []);
 
 
   const HandleClick = (index) => {
 
-    const newVisibility = []
+    const newVisibility = [...isVisible]
     newVisibility[index] = !newVisibility[index]
 
     setVisibility(newVisibility)
